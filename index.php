@@ -1,43 +1,38 @@
-<?php 
+<?php
 
 require_once("config.php");
 
-//carrega 1 usuario
+//Carrega um usuário
+//$root = new Usuario();
+//$root->loadbyId(3);
+//echo $root;
 
-/*$root = new Usuario();
+//Carrega uma lista de usuários
+//$lista = Usuario::getList();
+//echo json_encode($lista);
 
-$root -> loadByid(6);
+//Carrega uma lista de usuários buscando pelo login
+//$search = Usuario::search("jo");
+//echo json_encode($search);
 
-var_dump ($root);*/
+//Carrega um usuário usando o login e a senha
+//$usuario = new Usuario();
+//$usuario->login("root", "!@#$");
 
-//carrega umma lista de usuarios
+//echo $usuario;
 
-/*$lista = Usuario::getList();
+/*$aluno = new Usuario("aluno", "@lun0");
 
-echo json_encode($lista)*/
+$aluno->insert();
 
-//carrega uma lista de usuarios buscando pelo login
+echo $aluno;*/
 
-/*$busca = Usuario::search("gu");
+$usuario = new Usuario();
 
-echo json_encode($busca);*/
+$usuario -> loadById(7);
 
-//carrega um usuario usando o login e a senha
+$usuario -> update("guilher","HCK");
 
-$usuario =new Usuario();
+echo $usuario;
 
-$usuario->login("guilherme","123456");
-
-print_r($usuario);
-
-
-
-
-
-
-/*$sql = new Sql();
-
-$usuarios = $sql->select("SELECT * FROM tb_usuarios");
-
-echo json_encode($usuarios);*/
 ?>

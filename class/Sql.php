@@ -5,9 +5,13 @@ class Sql extends PDO{
      private $conn;
 
      public function __construct(){
-
-        $this->conn = new PDO("mysql:host=localhost;dbname=dbphp7","root","");
-     }
+ 
+      $this->conn = new PDO("mysql:host=localhost;dbname=dbphp7", "root", "", array(
+          \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+      ));
+   
+  }
+  
 
      private function setParams($statment, array $parameters){
 
@@ -36,7 +40,7 @@ class Sql extends PDO{
         return $stmt;
     }
 
-     public function select($rawQuery, $params = array()):array{
+     public function select($rawQuery, $params = array()){
 
          $stmt = $this->execQuery($rawQuery, $params);
 

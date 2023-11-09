@@ -53,12 +53,58 @@ class Usuario{
         }
     }
 
+    
+    public  function getList(){
+        $sql= new Sql();
+
+        return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+
+    }
+
+
+    public  function search($login){
+        $sql = new Sql();
+        $results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
+            ':SEARCH'=>"%".$login."%"
+        ));
+        foreach ($results as &$row) {
+            $row['deslogin'] = utf8_encode($row['deslogin']);
+        }
+        return $results;
+        
+        
+}
+
+    public function login($login, $password){
+
+        $sql= new Sql();
+
+        $results=$sql->select("SELECT * FROM tb_usuarios WHERE deslogin=:LOGIN AND dessenha = :PASSWORD", array(
+            ":LOGIN"=> $login,
+            "PASSWORD"=> $password
+        ));
+
+        if(count($results)>0){
+
+            $row = $results[0];
+
+            $this->setIdusuario($row['idusuario']);
+            $this->setDeslogin($row['deslogin']);
+            $this->setDessenha($row['dessenha']);
+            $this->setDtcadastro(new DateTime($row['dtcadastro']));
+
+
+        }else{
+            throw new Exception("login ou senha invalidos");
+        }
+    }
+
     public function __tooString(){
         return json_encode(array(
             "idusuario"=>$this->getIdusuario(),
             "deslogin"=>$this->getDeslogin(),
             "dessenha"=>$this->getDessenha(),
-            "dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
+            "dtcadastro"=>$this->getDtcadastro()->format("d/m/Y")
         ));
     }
 

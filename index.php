@@ -27,12 +27,24 @@ $aluno->insert();
 
 echo $aluno;*/
 
-$usuario = new Usuario();
+
+//alterar um usuario
+
+/*$usuario = new Usuario();
 
 $usuario -> loadById(7);
 
 $usuario -> update("guilher","HCK");
 
+echo $usuario;*/
+
+$usuario = new Usuario();
+
+$usuario -> loadById(4);
+
+$usuario -> delete();
+
 echo $usuario;
+
 
 ?>
